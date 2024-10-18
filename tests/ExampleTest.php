@@ -1,6 +1,6 @@
 <?php
 
-namespace VendorName\Skeleton\Tests;
+namespace Cekisakurek\LaChart\Tests;
 
 use PHPUnit\Framework\TestCase;
 
