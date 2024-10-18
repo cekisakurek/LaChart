@@ -2,14 +2,9 @@
 
 namespace Cekisakurek\LaChart;
 
-use Livewire\Component;
-
-class LineChart {
-
-    public function mount() {
-    
-
-    }
+class LineChart
+{
+    public function mount() {}
 
     public function render()
     {
