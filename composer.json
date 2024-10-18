@@ -25,19 +25,19 @@
     },
     "autoload": {
         "psr-4": {
-            "Cekisakurek\\LaChart\\": "src"
-        },
-        "extra": {
-            "laravel": {
-                "providers": [
-                    "Cekisakurek\\LaChart\\BlogPackageServiceProvider"
-                ]
-            }
+            "Cekisakurek\\LaChart\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Cekisakurek\\LaChart\\Tests\\": "tests"
+            "Cekisakurek\\LaChart\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Cekisakurek\\LaChart\\LaChartServiceProvider"
+            ]
         }
     },
     "scripts": {

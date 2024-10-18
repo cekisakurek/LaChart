@@ -4,7 +4,7 @@ namespace Cekisakurek\LaChart;
 
 use Livewire\Component;
 
-class LineChart {
+class LineChart extends Component {
 
     public function mount() {
     
