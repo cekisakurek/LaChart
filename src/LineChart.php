@@ -4,14 +4,16 @@ namespace Cekisakurek\LaChart;
 
 use Livewire\Component;
 
-class LineChart extends Component {
-
-
+class LineChart extends Component
+{
     public $labels = [];
+
     public $data = [];
+
     public $title = 'title';
 
     public $chart_id = 'la-chart-line-chart';
+
     public $chart_type = 'bar';
 
     public $background_colors = [
@@ -21,7 +23,7 @@ class LineChart extends Component {
         'rgba(75, 192, 192, 0.2)',
         'rgba(54, 162, 235, 0.2)',
         'rgba(153, 102, 255, 0.2)',
-        'rgba(201, 203, 207, 0.2)'
+        'rgba(201, 203, 207, 0.2)',
     ];
 
     public $border_colors = [
@@ -31,17 +33,15 @@ class LineChart extends Component {
         'rgb(75, 192, 192)',
         'rgb(54, 162, 235)',
         'rgb(153, 102, 255)',
-        'rgb(201, 203, 207)'
+        'rgb(201, 203, 207)',
     ];
 
     public $border_width = 1.0;
 
-    public function mount() {
-    
+    public function mount() {}
 
-    }
-
-    public function click($id) {
+    public function click($id)
+    {
         dd($this);
     }
 
