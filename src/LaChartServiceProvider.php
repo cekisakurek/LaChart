@@ -7,6 +7,8 @@ use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
 
 use Cekisakurek\LaChart\LineChart;
+use Cekisakurek\LaChart\CompositeChart;
+use Cekisakurek\LaChart\DoughnutChart;
 
 class LaChartServiceProvider extends ServiceProvider
 {
@@ -28,6 +30,8 @@ class LaChartServiceProvider extends ServiceProvider
   {
     //
     Livewire::component('line-chart', LineChart::class);
+    Livewire::component('composite-chart', CompositeChart::class);
+    Livewire::component('composite-chart', DoughnutChart::class);
     
   }
 }

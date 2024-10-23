@@ -12,21 +12,15 @@
             let value = e.chart.data.datasets[datasetIndex].data[dataIndex];
             let label = e.chart.data.labels[dataIndex];
             console.log("In click", datasetLabel, label, value);
-            
-            @this.click({id: 0 });
+            @this.click({label: label });
         }
     }
+    var datasets = @json($chart_data);
+    var labels = @json($this->labels);
     var bar_chart_config = {
-        type: String("{!! $chart_type !!}"),
         data: {
-            labels: @json($labels),
-            datasets: [{
-                label: String("{!! $title !!}"),
-                data: @json($data),
-                backgroundColor: @json($background_colors),
-                borderColor: @json($border_colors),
-                borderWidth: parseFloat("{!! $border_width !!}")
-            }]
+            datasets: datasets,
+            labels: labels
         },
         options: {
             scales: {
@@ -38,8 +32,8 @@
         }
     };
    
-    let chart_id = String("{!! $chart_id !!}");
-    var chart = new Chart(document.getElementById(chart_id), bar_chart_config);
+    var chart_id = "{!! $chart_id !!}";
+    var chart = new Chart(document.getElementById(String(chart_id)), bar_chart_config);
 
     document.addEventListener("DOMContentLoaded", function() {
         window.addEventListener('update_' + chart_id + '_data' , event => {

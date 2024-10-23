@@ -22,23 +22,40 @@
             labels: @json($labels),
             datasets: [{
                 label: String("{!! $title !!}"),
-                data: @json($data),
-                backgroundColor: @json($background_colors),
-                borderColor: @json($border_colors),
-                borderWidth: parseFloat("{!! $border_width !!}")
+                data: @json($chart_data->data),
+                backgroundColor: @json($chart_data->backgroundColor),
+                borderColor: @json($chart_data->borderColor),
+                borderWidth: parseFloat("{!! $chart_data->borderWidth !!}")
             }]
         },
         options: {
-            scales: {
-                y: {
-                    beginAtZero: true
+            plugins: {
+                legend: {
+                    display: false
                 }
             },
             onClick: on_click_handler
-        }
+        },
+        plugins: [{
+            id: 'text',
+            beforeDraw: function(chart, a, b) {
+                var width = chart.chartArea.width,
+                    height = chart.chartArea.height,
+                    ctx = chart.ctx;
+                ctx.restore();
+                var fontSize = (height / 114).toFixed(2);
+                ctx.font = fontSize + "em sans-serif";
+                ctx.textBaseline = "middle";
+                var text = chart.data.datasets[0].data.reduce((partialSum, a) => partialSum + a, 0),
+                    textX = Math.round((width - ctx.measureText(text).width) / 2),
+                    textY = (height / 2) + chart.legend.height + chart.titleBlock.height;
+                ctx.fillText(text, textX, textY);
+                ctx.save();
+            }
+        }]
     };
    
-    let chart_id = String("{!! $chart_id !!}");
+    var chart_id = String("{!! $chart_id !!}");
     var chart = new Chart(document.getElementById(chart_id), bar_chart_config);
 
     document.addEventListener("DOMContentLoaded", function() {
