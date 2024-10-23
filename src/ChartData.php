@@ -2,13 +2,16 @@
 
 namespace Cekisakurek\LaChart;
 
-class ChartData {
-  
+class ChartData
+{
     public $data = [];
+
     public $label = 'title';
+
     public $type = 'bar';
+
     public $yAxisID = 'y';
-   
+
     public $pointRadius = 1;
 
     public $backgroundColor = [
@@ -18,7 +21,7 @@ class ChartData {
         'rgba(75, 192, 192, 0.2)',
         'rgba(54, 162, 235, 0.2)',
         'rgba(153, 102, 255, 0.2)',
-        'rgba(201, 203, 207, 0.2)'
+        'rgba(201, 203, 207, 0.2)',
     ];
 
     public $borderColor = [
@@ -28,7 +31,7 @@ class ChartData {
         'rgb(75, 192, 192)',
         'rgb(54, 162, 235)',
         'rgb(153, 102, 255)',
-        'rgb(201, 203, 207)'
+        'rgb(201, 203, 207)',
     ];
 
     public $borderWidth = 1.0;
