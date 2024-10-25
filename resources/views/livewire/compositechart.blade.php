@@ -43,7 +43,11 @@
             bar_chart = new Chart(ctx, bar_chart_config);
             var chart_data = JSON.parse(event.detail.chart_data);
             // chart.data.labels = chart_data.labels;
-            bar_chart.data.datasets[0].data = chart_data.data;
+            chart_data.dataset.forEach(function (value, i) {
+                // console.log('%d: %s', i, value);
+                bar_chart.data.datasets[i].data = value;
+            });
+            
             // chart.update();
             bar_chart.update('none');
         });
