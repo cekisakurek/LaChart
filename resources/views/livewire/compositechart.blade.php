@@ -35,12 +35,9 @@
 
     document.addEventListener("DOMContentLoaded", function() {
         window.addEventListener('update_' + "{!! $chart_id !!}" + '_data' , event => {
-            console.log('Updating' + 'update_' + "{!! $chart_id !!}" + '_data');
+            console.log('Updating ' + "{!! $chart_id !!}";
             let composite_chart = Chart.getChart("{!! $chart_id !!}");
-            // composite_chart.destroy();
-            // let ctx = document.getElementById("{!! $chart_id !!}").getContext('2d');
-            // composite_chart = new Chart(ctx, composite_chart_config);
-
+ 
             let chart_data = JSON.parse(event.detail.chart_data);
             composite_chart.data.labels = chart_data.labels;
             composite_chart.data.datasets = [];
