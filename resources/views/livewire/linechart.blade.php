@@ -1,4 +1,4 @@
-<div>
+<div wire:ignore>
     <canvas id="{{ $chart_id }}"></canvas>
 </div>
 

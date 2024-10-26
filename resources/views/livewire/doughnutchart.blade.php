@@ -1,4 +1,4 @@
-<div>
+<div wire:ignore>
     <canvas id="{{ $chart_id }}"></canvas>
 </div>
 
@@ -16,7 +16,7 @@
             @this.click({id: 0 });
         }
     }
-    var bar_chart_config = {
+    var doughnut_chart_config = {
         type: String("{!! $chart_type !!}"),
         data: {
             labels: @json($labels),
@@ -55,20 +55,22 @@
         }]
     };
    
-    var chart_id = String("{!! $chart_id !!}");
-    var chart = new Chart(document.getElementById(chart_id), bar_chart_config);
+    new Chart(document.getElementById("{!! $chart_id !!}"), doughnut_chart_config);
 
     document.addEventListener("DOMContentLoaded", function() {
-        window.addEventListener('update_' + chart_id + '_data' , event => {
-            var bar_chart = Chart.getChart(chart_id);
-            bar_chart.destroy();
-            var ctx = document.getElementById(chart_id).getContext('2d');
-            bar_chart = new Chart(ctx, bar_chart_config);
-            var chart_data = JSON.parse(event.detail.chart_data);
-            // chart.data.labels = chart_data.labels;
-            bar_chart.data.datasets[0].data = chart_data.data;
+        window.addEventListener('update_' + "{!! $chart_id !!}" + '_data' , event => {
+            var doughnut_chart = Chart.getChart("{!! $chart_id !!}");
+            doughnut_chart.destroy();
+            let ctx = document.getElementById("{!! $chart_id !!}").getContext('2d');
+            doughnut_chart = new Chart(ctx, doughnut_chart_config);
+            let chart_data = JSON.parse(event.detail.chart_data);
+            doughnut_chart.data.labels = chart_data.labels;
+            chart_data.dataset.forEach(function (value, i) {
+            
+                doughnut_chart.data.datasets[i].data = value;
+            });
             // chart.update();
-            bar_chart.update('none');
+            doughnut_chart.update();
         });
     });
 </script>
