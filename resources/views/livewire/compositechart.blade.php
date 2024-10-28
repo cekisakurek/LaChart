@@ -13,6 +13,10 @@
                 labels: @json($this->labels)
             },
             options: {
+                parsing: {
+                    xAxisKey: 'values.x',
+                    yAxisKey: 'values.y'
+                },
                 scales: {
                     y: {
                         beginAtZero: true
@@ -26,7 +30,7 @@
                         let value = e.chart.data.datasets[datasetIndex].data[dataIndex];
                         let label = e.chart.data.labels[dataIndex];
                         console.log("In click", datasetLabel, label, value);
-                        @this.click({label: label });
+                        @this.click({item: value });
                     }
                 }
             }
@@ -35,18 +39,23 @@
 
     document.addEventListener("DOMContentLoaded", function() {
         window.addEventListener('update_' + "{!! $chart_id !!}" + '_data' , event => {
-            console.log('Updating ' + "{!! $chart_id !!}";
+            console.log('Updating ' + "{!! $chart_id !!}");
             let composite_chart = Chart.getChart("{!! $chart_id !!}");
  
             let chart_data = JSON.parse(event.detail.chart_data);
+            
             composite_chart.data.labels = chart_data.labels;
             composite_chart.data.datasets = [];
             
             chart_data.dataset.forEach(function (value, i) {
                 composite_chart.data.datasets.push(value);
+                
             });
+            console.dir(composite_chart.data.datasets);
             
-            // chart.update();
+            composite_chart.options.parsing.xAxisKey = 'values.x';
+            composite_chart.options.parsing.yAxisKey = 'values.y';
+
             composite_chart.update();
         });
     });
