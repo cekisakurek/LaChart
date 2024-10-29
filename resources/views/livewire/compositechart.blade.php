@@ -9,17 +9,20 @@
     new Chart(document.getElementById(String("{!! $chart_id !!}")),
         {
             data: {
-                datasets: @json($chart_data),
-                labels: @json($this->labels)
+                datasets: @json($chart_data)
             },
             options: {
                 parsing: {
-                    xAxisKey: 'values.x',
-                    yAxisKey: 'values.y'
+                    xAxisKey: 'x',
+                    yAxisKey: 'y'
                 },
                 scales: {
                     y: {
-                        beginAtZero: true
+                        beginAtZero: true,
+                        position: 'left'
+                    },
+                    y1: {
+                        position: 'right'
                     }
                 },
                 onClick: (e, activeEls) => {
@@ -44,17 +47,17 @@
  
             let chart_data = JSON.parse(event.detail.chart_data);
             
-            composite_chart.data.labels = chart_data.labels;
+            // composite_chart.data.labels = chart_data.labels;
             composite_chart.data.datasets = [];
             
-            chart_data.dataset.forEach(function (value, i) {
+            chart_data.forEach(function (value, i) {
                 composite_chart.data.datasets.push(value);
                 
             });
             console.dir(composite_chart.data.datasets);
             
-            composite_chart.options.parsing.xAxisKey = 'values.x';
-            composite_chart.options.parsing.yAxisKey = 'values.y';
+            composite_chart.options.parsing.xAxisKey = 'x';
+            composite_chart.options.parsing.yAxisKey = 'y';
 
             composite_chart.update();
         });

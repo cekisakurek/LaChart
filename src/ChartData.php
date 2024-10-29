@@ -36,3 +36,17 @@ class ChartData
 
     public $borderWidth = 1.0;
 }
+
+
+class ChartDataEntry {
+    public $id;
+    public $x;
+    public $y;
+
+    function __construct($id, $x, $y) {
+        $this->id = $id;
+        $this->x = $x;
+        $this->y = $y;
+    }
+}
+

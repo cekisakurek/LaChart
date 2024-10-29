@@ -10,8 +10,6 @@ class CompositeChart extends Component
 
     private $chart_data;
 
-    public $labels = [];
-
     public function mount() {}
 
     public function setChartData($chart_data)
@@ -19,9 +17,18 @@ class CompositeChart extends Component
         $this->chart_data = $chart_data;
     }
 
+    public function updateChartData($new_chart_data) 
+    {
+        for($x = 0; $x < count($new_chart_data); $x++) {
+            $prepared_data = $new_chart_data[$x]->data;
+            $new_chart_data[$x]->data = array_values($prepared_data->toArray());
+        }
+        $this->dispatch('update_'.$this->chart_id.'_data', chart_data: json_encode($new_chart_data));
+    }
+
     public function click($id)
     {
-        dd($this);
+        dd($id);
     }
 
     public function render()
