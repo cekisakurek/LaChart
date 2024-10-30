@@ -18,17 +18,35 @@
                 scales: {
                     x: {
                         grid: @json($x_grid),
+                        ticks: {
+                            callback: function(value, index, ticks) {
+                                let formatted = Chart.Ticks.formatters.numeric.apply(this, [value, index, ticks]);
+                                return String("{!! $left_x_unit !!}") + formatted + String("{!! $right_x_unit !!}");
+                            }
+                        }
                     },
                     y: {
                         beginAtZero: true,
                         position: 'left',
                         display: "{!! $show_left_axis !!}",
                         grid: @json($y_grid),
+                        ticks: {
+                            callback: function(value, index, ticks) {
+                                let formatted = Chart.Ticks.formatters.numeric.apply(this, [value, index, ticks]);
+                                return String("{!! $left_y_unit !!}") + formatted + String("{!! $right_y_unit !!}");
+                            }
+                        }
                     },
                     y1: {
                         position: 'right',
                         display: "{!! $show_right_axis !!}",
                         grid: @json($y1_grid),
+                        ticks: {
+                            callback: function(value, index, ticks) {
+                                let formatted = Chart.Ticks.formatters.numeric.apply(this, [value, index, ticks]);
+                                return String("{!! $left_y1_unit !!}") + formatted + String("{!! $right_y1_unit !!}");
+                            }
+                        }
                     }
                 },
                 onClick: (e, activeEls) => {

@@ -15,6 +15,15 @@ class CompositeChart extends Component
     public $show_left_axis = true;
     public $canvas_background_color = 'rgba(255, 255, 255, 1.0)';
 
+    public $left_x_unit = '';
+    public $right_x_unit = '';
+
+    public $left_y_unit = '';
+    public $right_y_unit = '';
+
+    public $left_y1_unit = '';
+    public $right_y1_unit = '';
+
     private $x_grid;
     private $y_grid;
     private $y1_grid;
