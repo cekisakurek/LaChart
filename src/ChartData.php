@@ -35,6 +35,9 @@ class ChartData
     ];
 
     public $borderWidth = 1.0;
+
+    public $showLine = true;
+
 }
 
 

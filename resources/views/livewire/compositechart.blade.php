@@ -1,11 +1,10 @@
 <div wire:ignore>
-    <div style="position: relative; height:80vh;">
+    <div style="position: relative; height:40vh;">
         <canvas id="{{ $chart_id }}"></canvas>
     </div>
 </div>
 
 <script>
-
     new Chart(document.getElementById(String("{!! $chart_id !!}")),
         {
             data: {
@@ -17,12 +16,19 @@
                     yAxisKey: 'y'
                 },
                 scales: {
+                    x: {
+                        grid: @json($x_grid),
+                    },
                     y: {
                         beginAtZero: true,
-                        position: 'left'
+                        position: 'left',
+                        display: "{!! $show_left_axis !!}",
+                        grid: @json($y_grid),
                     },
                     y1: {
-                        position: 'right'
+                        position: 'right',
+                        display: "{!! $show_right_axis !!}",
+                        grid: @json($y1_grid),
                     }
                 },
                 onClick: (e, activeEls) => {
@@ -35,8 +41,26 @@
                         console.log("In click", datasetLabel, label, value);
                         @this.click({item: value });
                     }
+                },
+                plugins: {
+                    customCanvasBackgroundColor: {
+                        color: "{!! $canvas_background_color !!}",
+                    }
                 }
-            }
+            },
+            plugins: [
+                {
+                    id: 'customCanvasBackgroundColor',
+                    beforeDraw: (chart, args, options) => {
+                        const {ctx} = chart;
+                        ctx.save();
+                        ctx.globalCompositeOperation = 'destination-over';
+                        ctx.fillStyle = options.color || '#99ffff';
+                        ctx.fillRect(0, 0, chart.width, chart.height);
+                        ctx.restore();
+                    }
+                }
+            ],
         }
     );
 
