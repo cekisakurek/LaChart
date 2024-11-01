@@ -1,5 +1,5 @@
 <div wire:ignore>
-    <div style="position: relative; height:40vh;">
+    <div style="position: relative;">
         <canvas id="{{ $chart_id }}"></canvas>
     </div>
 </div>
@@ -20,8 +20,13 @@
                         grid: @json($x_grid),
                         ticks: {
                             callback: function(value, index, ticks) {
-                                let formatted = Chart.Ticks.formatters.numeric.apply(this, [value, index, ticks]);
-                                return String("{!! $left_x_unit !!}") + formatted + String("{!! $right_x_unit !!}");
+                                let formatterName = String("{!! $formatter_name !!}");
+                                if(formatterName === 'number') {
+                                    let formatted = Chart.Ticks.formatters.numeric.apply(this, [value, index, ticks]);
+                                    return String("{!! $left_x_unit !!}") + formatted + String("{!! $right_x_unit !!}");
+                                } else {
+                                    return String("{!! $left_x_unit !!}") + this.getLabelForValue(value) + String("{!! $right_x_unit !!}");
+                                }
                             }
                         }
                     },
@@ -32,8 +37,13 @@
                         grid: @json($y_grid),
                         ticks: {
                             callback: function(value, index, ticks) {
-                                let formatted = Chart.Ticks.formatters.numeric.apply(this, [value, index, ticks]);
-                                return String("{!! $left_y_unit !!}") + formatted + String("{!! $right_y_unit !!}");
+                                let formatterName = String("{!! $formatter_name !!}");
+                                if(formatterName === 'number') {
+                                    let formatted = Chart.Ticks.formatters.numeric.apply(this, [value, index, ticks]);
+                                    return String("{!! $left_y_unit !!}") + formatted + String("{!! $right_y_unit !!}");
+                                } else {
+                                    return String("{!! $left_y_unit !!}") + this.getLabelForValue(value) + String("{!! $right_y_unit !!}");
+                                }
                             }
                         }
                     },
@@ -43,8 +53,13 @@
                         grid: @json($y1_grid),
                         ticks: {
                             callback: function(value, index, ticks) {
-                                let formatted = Chart.Ticks.formatters.numeric.apply(this, [value, index, ticks]);
-                                return String("{!! $left_y1_unit !!}") + formatted + String("{!! $right_y1_unit !!}");
+                                let formatterName = String("{!! $formatter_name !!}");
+                                if(formatterName === 'number') {
+                                    let formatted = Chart.Ticks.formatters.numeric.apply(this, [value, index, ticks]);
+                                    return String("{!! $left_y1_unit !!}") + formatted + String("{!! $right_y1_unit !!}");
+                                } else {
+                                    return String("{!! $left_y1_unit !!}") + this.getLabelForValue(value) + String("{!! $right_y1_unit !!}");
+                                }
                             }
                         }
                     }
