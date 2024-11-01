@@ -37,19 +37,20 @@ class ChartData
     public $borderWidth = 1.0;
 
     public $showLine = true;
-
 }
 
-
-class ChartDataEntry {
+class ChartDataEntry
+{
     public $id;
+
     public $x;
+
     public $y;
 
-    function __construct($id, $x, $y) {
+    public function __construct($id, $x, $y)
+    {
         $this->id = $id;
         $this->x = $x;
         $this->y = $y;
     }
 }
-
